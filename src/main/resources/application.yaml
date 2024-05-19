@@ -1,4 +1,23 @@
 # 应用服务 WEB 访问端口
 server:
   port: 80
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ai?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: "000000dong"
+
+gpt:
+  model:
+    key: sk-Z6WbVRE94Euzhvgb80NnCF4W8rNH9UKrF6tTr0ZqJSCo3qqI
+  # proxy:
+  #   host: 127.0.0.1
+  #   port: 7890
