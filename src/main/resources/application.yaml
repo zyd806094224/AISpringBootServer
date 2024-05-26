@@ -17,7 +17,7 @@ spring:
 
 gpt:
   model:
-    key: sk-Z6WbVRE94Euzhvgb80NnCF4W8rNH9UKrF6tTr0ZqJSCo3qqI
+    key: sk-Z6WbVRE94Euzhvgb80NnCF4W8rNH9UKrF6tTr0ZqJSCo3qqI   #月之暗面apiKey
   # proxy:
   #   host: 127.0.0.1
   #   port: 7890

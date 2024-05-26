@@ -11,7 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatRequestParameter {
-    private String model = "gpt-3.5-turbo";
+//    private String model = "gpt-3.5-turbo";
+    private String model = "moonshot-v1-8k";  //月之暗面 模型
 
     private List<ChatMessage> messages = new ArrayList<>();
 

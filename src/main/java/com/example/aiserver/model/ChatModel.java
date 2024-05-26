@@ -33,7 +33,8 @@ public class ChatModel {
     @Value("${gpt.model.key}")
     private String apiKey;
 
-    private String url = "https://api.openai.com/v1/chat/completions";
+//    private String url = "https://api.openai.com/v1/chat/completions";
+    private String url = "https://api.moonshot.cn/v1/chat/completions";  //月之暗面url
     private final Charset charset = StandardCharsets.UTF_8;
 
 
