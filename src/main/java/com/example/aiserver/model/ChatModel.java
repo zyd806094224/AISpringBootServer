@@ -125,6 +125,11 @@ public class ChatModel {
                             }
                         } catch (JsonProcessingException e) {
                             log.warn("转换异常，{} 不能被转换为json", s.trim());
+                            //免费模型 一分钟之内只能请求3次
+                            if(s.trim().contains("please try again after")
+                                    || s.trim().contains("Invalid request: agent message content is empty")){
+                                resConsumer.accept("您的会员积分不足了，请稍后再试");
+                            }
                         }
 
                     }
