@@ -80,7 +80,10 @@ public class GenerateAIImgUtil {
         String base64String = text.getJSONObject(0).getString("content");
 
         // 目标文件路径
-        String outputFilePath = System.currentTimeMillis() + "output_image.png";
+        String outputFilePath = System.getProperty("user.dir")
+                + System.getProperty("file.separator") + "images"
+                + System.getProperty("file.separator") + "ai_generate"
+                + System.getProperty("file.separator") + System.currentTimeMillis() + "output_image.png";
 
         try {
             // 调用方法将Base64字符串转换为图片文件
