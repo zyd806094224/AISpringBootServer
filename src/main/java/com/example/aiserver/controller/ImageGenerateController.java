@@ -5,6 +5,7 @@ import com.example.aiserver.service.AiPicService;
 import com.example.aiserver.utils.GenerateAIImgUtil;
 import com.example.aiserver.utils.MD5Util;
 import com.example.aiserver.utils.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import java.util.Objects;
 /**
  * 图片生成Controller
  */
+@Slf4j
 @RestController
 @RequestMapping("/ImageGenerate")
 public class ImageGenerateController {
@@ -32,13 +34,13 @@ public class ImageGenerateController {
         String picPromptMd5 = MD5Util.md5(prompt);
         AiPic aiPic = aiPicService.queryByMd5(picPromptMd5);
         if (aiPic != null) {
-            return Result.ok("成功", aiPic.getPic_url());
+            return Result.ok("成功", aiPic.getPicUrl());
         } else {
             String picUrl = GenerateAIImgUtil.generateAIImg(prompt);
             if (!"".equals(picUrl)) {
                 AiPic newAiPic = new AiPic();
                 newAiPic.setMd5(picPromptMd5);
-                newAiPic.setPic_url(picUrl);
+                newAiPic.setPicUrl(picUrl);
                 aiPicService.save(newAiPic);
                 return Result.ok("成功", picUrl);
             }
