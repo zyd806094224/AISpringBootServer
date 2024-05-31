@@ -36,7 +36,7 @@ public class GenerateAIImgUtil {
     /**
      * @param prompt 提示词 小于1000字   domain: general
      */
-    public static void generateAIImg(String prompt) {
+    public static String generateAIImg(String prompt) {
         String authUrl = "";
         try {
             authUrl = getAuthUrl(hostUrl, apiKey, apiSecret);
@@ -66,32 +66,39 @@ public class GenerateAIImgUtil {
                     "  }\n" +
                     "}";
             String res = doPostJson(authUrl, null, json);
-            parseResImgContent(res);
+            String picUrl = parseResImgContent(res);
+            return picUrl;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
     }
 
-    private static void parseResImgContent(String res) {
+    private static String parseResImgContent(String res) {
         JSONObject parseObject = JSONObject.parseObject(res);
         JSONObject payload = parseObject.getJSONObject("payload");
         JSONObject choices = payload.getJSONObject("choices");
         JSONArray text = choices.getJSONArray("text");
         String base64String = text.getJSONObject(0).getString("content");
 
+        String picPathSuffix = System.currentTimeMillis() + "output_image.png";
         // 目标文件路径
         String outputFilePath = System.getProperty("user.dir")
                 + System.getProperty("file.separator") + "images"
                 + System.getProperty("file.separator") + "ai_generate"
-                + System.getProperty("file.separator") + System.currentTimeMillis() + "output_image.png";
+                + System.getProperty("file.separator") + picPathSuffix;
 
         try {
             // 调用方法将Base64字符串转换为图片文件
             decodeBase64ToImage(base64String, outputFilePath);
             log.warn("图片已成功保存到: " + outputFilePath);
+            if(new File(outputFilePath).exists()){
+                return "http://" + LocalhostAddressUtil.getLocalHostAddress() + ":80/images/ai_generate/" + picPathSuffix;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
     }
 
 
