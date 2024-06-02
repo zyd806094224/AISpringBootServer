@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -41,12 +42,11 @@ public class ImageGenerateController {
                 AiPic newAiPic = new AiPic();
                 newAiPic.setMd5(picPromptMd5);
                 newAiPic.setPicUrl(picUrl);
+                newAiPic.setCreateTime(LocalDateTime.now());
                 aiPicService.save(newAiPic);
                 return Result.ok("成功", picUrl);
             }
         }
         return Result.fail("图片生成失败了");
     }
-
-
 }
